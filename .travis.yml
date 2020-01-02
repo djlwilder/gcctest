@@ -13,6 +13,11 @@ arch:
   - s390x
   - ppc64le
 
+addons:
+  apt:
+    update: true
+    packages: build-essential
+
 compiler:
   - gcc
   - clang
