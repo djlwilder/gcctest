@@ -16,7 +16,7 @@ arch:
 addons:
   apt:
     update: true
-    packages: build-essential
+    packages: build-essential gdb
 
 compiler:
   - gcc

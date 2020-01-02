@@ -17,6 +17,18 @@ set -ex
 # EOS
 
 
+cat > ~root/.gdbinit <<EOS
+set pagination off
+set logging file gdb.output
+set logging on
+run
+bt
+disassemble main
+info registers
+quit
+EOS
+
+
 cat >testprg.c <<EOS
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -25,14 +37,13 @@ cat >testprg.c <<EOS
 int main(int argc, char *argv[])
 {
 	struct stat st;
-	//fstat(0, &st);
-	fstat(9, &st);
+	fstat(0, &st);
 	return 0;
 }
 EOS
 
 cat testprg.c
-${CC:-cc} -Wall -o testprg testprg.c
+${CC:-cc} -Wall -g -o testprg testprg.c
 
 # ./testprg </dev/null
 # echo a >input
@@ -51,5 +62,5 @@ ls -l /proc/self/fd
 echo e >fifo
 rm fifo
 ls -l /proc/self/fd
-./testprg <&8
+gdb ./testprg <&8
 
