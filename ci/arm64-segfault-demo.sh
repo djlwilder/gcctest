@@ -33,20 +33,13 @@ EOS
 cat testprg.c
 ${CC:-cc} -Wall -o testprg testprg.c
 
-./testprg </dev/null
-
-echo a >input
-./testprg <input
-
-echo b |./testprg
+# ./testprg </dev/null
+# echo a >input
+# ./testprg <input
+# echo b |./testprg
 
 rm -f fifo
 mkfifo fifo
-
-./testprg <fifo &
-echo c >fifo
-
-sleep 1  # wait for the background process
 
 exec 8<>fifo
 echo d >fifo
