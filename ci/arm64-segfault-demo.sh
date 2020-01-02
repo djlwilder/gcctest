@@ -36,6 +36,7 @@ sleep 1  # wait for the background process
 
 exec 8<>fifo
 echo d >fifo
+ls -l /proc/self/fd
 ./testprg <&8
 
 # This will segfault on arm64 and ppc64le, but not elsewhere:
