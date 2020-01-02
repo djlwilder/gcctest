@@ -56,5 +56,6 @@ ls -l /proc/self/fd
 # This will segfault on arm64 and ppc64le, but not elsewhere:
 echo e >fifo
 rm fifo
+ls -l /proc/self/fd
 ./testprg <&8
 
