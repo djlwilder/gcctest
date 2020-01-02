@@ -25,7 +25,8 @@ cat >testprg.c <<EOS
 int main(int argc, char *argv[])
 {
 	struct stat st;
-	fstat(0, &st);
+	//fstat(0, &st);
+	fstat(8, &st);
 	return 0;
 }
 EOS
