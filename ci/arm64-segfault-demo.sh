@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 {
 	struct stat st;
 	//fstat(0, &st);
-	fstat(8, &st);
+	fstat(9, &st);
 	return 0;
 }
 EOS
