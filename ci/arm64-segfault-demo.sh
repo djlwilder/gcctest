@@ -33,11 +33,16 @@ cat >testprg.c <<EOS
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <fcntl.h>
 
 int main(int argc, char *argv[])
 {
 	struct stat st;
-	fstat(0, &st);
+	int fd;
+
+	fd=open("./fifo",O_RDWR);
+	unlink("./fifo");
+	fstat(fd, &st);
 	return 0;
 }
 EOS
@@ -53,14 +58,12 @@ ${CC:-cc} -Wall -g -o testprg testprg.c
 rm -f fifo
 mkfifo fifo
 
-exec 8<>fifo
+# exec 8<>fifo
 # echo d >fifo
 # ls -l /proc/self/fd
 # ./testprg <&8
 
 # This will segfault on arm64 and ppc64le, but not elsewhere:
-echo e >fifo
-rm fifo
 ls -l /proc/self/fd
-./testprg <&8
+./testprg
 
