@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -ex
 
@@ -23,15 +23,15 @@ int main(int argc, char *argv[])
 EOS
 
 # Test prog for testing gdb setup.
-#  cat >testprg.c <<EOS
-#  int main(int argc, char *argv[])
-#  {
-#            char *a;
-#            a=(char *)0;
-#            a[1]="A";
-#            return 0;
-#  }
-#  EOS
+  cat >testprg.c <<EOS
+  int main(int argc, char *argv[])
+  {
+            char *a;
+            a=(char *)0;
+            a[1]="A";
+            return 0;
+  }
+EOS
 
 
 cat testprg.c
@@ -43,7 +43,10 @@ mkfifo fifo
 
 # This will segfault on arm64 and ppc64le, but not elsewhere:
 ./testprg || RESULT=$?
-if [[ ${RESULT} != 139 ]]; then echo "expected segfault and 139 exit but instead exited with ${RESULT}" && exit 0; fi;
+if [ "$RESULT" != 139 ]; then
+	echo "expected segfault and 139 exit but instead exited with $RESULT"
+	exit 0
+fi
 for i in $(find ./ -maxdepth 1 -name 'core*' -print); do
 	ls $i;
 	gdb $(pwd)/testprg $i -ex "thread apply all bt" -ex "set pagination 0" -batch;
