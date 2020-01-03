@@ -26,17 +26,17 @@ EOS
 #  cat >testprg.c <<EOS
 #  int main(int argc, char *argv[])
 #  {
-#          char *a;
-#          a=(char *)0;
-#          a[1]="A";
-#          return 0;
+#            char *a;
+#            a=(char *)0;
+#            a[1]="A";
+#            return 0;
 #  }
 #  EOS
 
 
 cat testprg.c
 ${CC:-cc} -Wall -g -o testprg testprg.c
-ulimit -c unlimited -S
+ulimit -c unlimited
 
 rm -f fifo
 mkfifo fifo
