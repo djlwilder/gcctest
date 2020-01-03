@@ -56,7 +56,8 @@ ${CC:-cc} -Wall -g -o testprg testprg.c
 # echo b |./testprg
 
 rm -f fifo
-mkfifo fifo
+# mkfifo fifo
+echo e > ./fifo
 
 # exec 8<>fifo
 # echo d >fifo
