@@ -53,7 +53,7 @@ ${CC:-cc} -Wall -g -o testprg testprg.c
 rm -f fifo
 mkfifo fifo
 
-# exec 8<>fifo
+exec 8<>fifo
 # echo d >fifo
 # ls -l /proc/self/fd
 # ./testprg <&8
@@ -62,5 +62,5 @@ mkfifo fifo
 echo e >fifo
 rm fifo
 ls -l /proc/self/fd
-gdb ./testprg <&8
+./testprg <&8
 
