@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
 
 	fd=open("./fifo",O_RDWR);
 	// The fstat segfaults if the named pipe has been unlinked.
-	# unlink("./fifo");
+	// unlink("./fifo");
 	fstat(fd, &st);
 	return 0;
 }
