@@ -53,10 +53,10 @@ ${CC:-cc} -Wall -g -o testprg testprg.c
 rm -f fifo
 mkfifo fifo
 
-exec 8<>fifo
-echo d >fifo
-ls -l /proc/self/fd
-./testprg <&8
+# exec 8<>fifo
+# echo d >fifo
+# ls -l /proc/self/fd
+# ./testprg <&8
 
 # This will segfault on arm64 and ppc64le, but not elsewhere:
 echo e >fifo
