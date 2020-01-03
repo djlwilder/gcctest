@@ -16,7 +16,7 @@ arch:
 addons:
   apt:
     update: true
-    packages: build-essential gdb
+    packages: build-essential gdb apport
 
 compiler:
   - gcc
@@ -25,6 +25,15 @@ compiler:
 matrix:
   include:
     - os: osx
+
+before_install:
+   - ulimit -c
+   - ulimit -a -S
+   - ulimit -a -H
+   - cat /proc/sys/kernel/core_pattern
+   - cat /etc/default/apport
+   - service --status-all || true
+   - initctl list || true
 
 script: ci/arm64-segfault-demo.sh
 
