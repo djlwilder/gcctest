@@ -36,6 +36,8 @@ EOS
 
 cat testprg.c
 ${CC:-cc} -Wall -g -o testprg testprg.c
+
+sudo bash -c "echo core > /proc/sys/kernel/core_pattern"
 ulimit -c unlimited
 
 rm -f fifo
