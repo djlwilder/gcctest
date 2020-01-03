@@ -41,6 +41,7 @@ int main(int argc, char *argv[])
 	int fd;
 
 	fd=open("./fifo",O_RDWR);
+	fstat(fd, &st);
 	unlink("./fifo");
 	fstat(fd, &st);
 	return 0;
@@ -56,8 +57,8 @@ ${CC:-cc} -Wall -g -o testprg testprg.c
 # echo b |./testprg
 
 rm -f fifo
-# mkfifo fifo
-echo e > ./fifo
+mkfifo fifo
+# echo e > ./fifo
 
 # exec 8<>fifo
 # echo d >fifo
